@@ -1,0 +1,1 @@
+export const SET_CLICKED_TIME = "SET_CLICKED_TIME";
