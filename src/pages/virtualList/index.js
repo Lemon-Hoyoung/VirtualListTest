@@ -16,8 +16,10 @@ export default memo(function VirtualList() {
     }), shallowEqual);
 
     const timeSpend = useMemo(() => {
-        return virtualListAppearTime - clickTime;
-    }, [virtualListAppearTime, clickTime]);
+        if (virtualListAppearTime > clickTime) {
+            return clickTime !== 0 ? virtualListAppearTime - clickTime : clickTime;
+        }
+    }, [virtualListAppearTime]);
 
     useEffect(() => {
         dispatch(setAppearedTime(new Date().getTime()));
