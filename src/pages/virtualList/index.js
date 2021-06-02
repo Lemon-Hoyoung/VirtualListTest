@@ -1,7 +1,6 @@
 import React, { memo, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { VirtualListWrapper } from './style';
-import localData from '../../local-data/local-data.js';
 import ListAtom from '../../components/listAtom'
 import VList from '../../components/VList';
 
@@ -10,9 +9,10 @@ import { setAppearedTime } from './store/actionCreators';
 export default memo(function VirtualList() {
 
     const dispatch = useDispatch();
-    const { virtualListAppearTime, clickTime } = useSelector(state => ({
+    const { virtualListAppearTime, clickTime, listItem } = useSelector(state => ({
         virtualListAppearTime: state.getIn(["virtualListTime", "virtualListAppearTime"]),
-        clickTime: state.getIn(["clickTime", "clickedTime"])
+        clickTime: state.getIn(["clickTime", "clickedTime"]),
+        listItem: state.getIn(["clickTime", "listItem"])
     }), shallowEqual);
 
     const timeSpend = useMemo(() => {
@@ -23,12 +23,12 @@ export default memo(function VirtualList() {
 
     useEffect(() => {
         dispatch(setAppearedTime(new Date().getTime()));
-    }, [dispatch]);
+    }, [dispatch, listItem]);
     return (
         <VirtualListWrapper>
             <span className="appearTime">显示虚拟列表花费时长：{ timeSpend } ms</span>
             <ul className="list">
-                <VList appearH={700} itemH={60} ItemMap={{Module: ListAtom, title: "title", content: "content", key: "title"}} DataSet={localData} />
+                <VList appearH={700} itemH={60} ItemMap={{Module: ListAtom, title: "title", content: "content", key: "title"}} DataSet={listItem} />
                 {/* <VList appearH={700} itemH={60}>
                     {
                         localData.map((item, index) => {

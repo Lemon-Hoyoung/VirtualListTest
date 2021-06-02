@@ -12,5 +12,11 @@ export const ControlWrapper = styled.div`
         button {
             margin-top: 30px;
         }
+
+        input {
+            margin-top: 30px;
+            position: relative;
+            left: -10px;
+        }
     }
 `;

@@ -1,1 +1,3 @@
 export const SET_CLICKED_TIME = "SET_CLICKED_TIME";
+
+export const SET_LIST_ITEM_NUMBER = "SET_LIST_ITEM_NUMBER";
