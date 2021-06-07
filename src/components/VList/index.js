@@ -3,12 +3,12 @@ import { VListWrapper, SlidePieceWrapper, WindowWrapper } from './style'
 
 export default memo(function VList(props) {
     const { appearH = 0, itemH = 0, children, ItemMap = {}, DataSet } = props;
-    const [indexObj, setIndex] = useState({ up: 0, down: Math.floor(appearH / itemH), distance: 0 });
+    const [indexObj, setIndex] = useState({ up: 0, down: Math.floor(appearH / itemH) + 10, distance: 0 });
 
     const scrollCb = useCallback((e) => {
         const scrollDis = e.target.scrollTop;
         const upIndex = Math.floor(scrollDis / itemH);
-        const downIndex = Math.floor(upIndex + (appearH / itemH));
+        const downIndex = Math.floor(upIndex + (appearH / itemH)) + 10;
         setIndex({up: upIndex, down: downIndex, distance: upIndex * itemH});
     }, [itemH, appearH]);
 
